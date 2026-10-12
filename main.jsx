@@ -8,7 +8,6 @@ import signatureDabeliImage from './signature-dabeli-real.jpg';
 import siteReferenceImage from './site-reference.jpg';
 
 
-const API = import.meta.env.VITE_API_URL || '/api';
 const MAPS_URL = 'https://maps.app.goo.gl/FB1o8G1ofJJSXWEs9?g_st=ic';
 const INSTAGRAM_URL = 'https://www.instagram.com/shree_krishna_kacchi_dabeli/';
 const PHONE = '+919975348154';
@@ -37,22 +36,14 @@ function App(){
   const add=(item)=>{setCart(c=>{const found=c.find(x=>x.id===item.id);return found?c.map(x=>x.id===item.id?{...x,qty:x.qty+1}:x):[...c,{...item,qty:1}]});showToast(`${item.name} added`)};
   const changeQty=(id,delta)=>setCart(c=>c.map(x=>x.id===id?{...x,qty:Math.max(0,x.qty+delta)}:x).filter(x=>x.qty>0));
 
-  const checkout=async()=>{
+  const checkout=()=>{
     if(!cart.length){showToast('Add a dabeli first');return}
     if(!customer.name.trim()||!customer.phone.trim()){showToast('Please enter your name and phone');return}
-    try{
-      const r=await fetch(`${API}/orders`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:cart,total,customer})});
-      if(!r.ok) throw new Error('Order failed');
-      const data=await r.json();
-      setCart([]);setCustomer({name:'',phone:'',notes:''});
-      showToast(`Order ${data.orderId?.slice(0,6).toUpperCase()||'received'} received`);
-      setMenuOpen(false);
-    }catch(e){
-      const text=cart.map(x=>`${x.name} x${x.qty}`).join(', ');
-      const wa=`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Hello Shree Krishna Kacchi Dabeli Centre!\nName: ${customer.name}\nPhone: ${customer.phone}\nOrder: ${text}\nTotal: ₹${total}${customer.notes?`\nNote: ${customer.notes}`:''}`)}`;
-      window.open(wa,'_blank','noopener,noreferrer');
-      showToast('Opening WhatsApp order');
-    }
+    const items=cart.map(x=>`${x.name} x${x.qty} — ₹${x.price*x.qty}`).join('\n');
+    const message=`Hello Shree Krishna Kacchi Dabeli Centre!\nName: ${customer.name.trim()}\nPhone: ${customer.phone.trim()}\nOrder:\n${items}\nTotal: ₹${total}${customer.notes?`\nNote: ${customer.notes}`:''}`;
+    const link=`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+    // The shop receives the order only after the customer sends it in WhatsApp.
+    window.location.href=link;
   };
 
   return <div className="site">

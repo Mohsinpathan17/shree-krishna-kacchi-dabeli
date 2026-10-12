@@ -3,6 +3,10 @@ import {createRoot} from 'react-dom/client';
 import {AnimatePresence, motion} from 'framer-motion';
 import {ArrowRight, Check, ChevronLeft, ChevronRight, Clock3, Instagram, MapPin, Menu as MenuIcon, MessageCircle, Minus, Phone, Plus, ShoppingBag, Star, Truck, X} from 'lucide-react';
 import './styles.css';
+import butterDabeliImage from './butter-dabeli.webp';
+import signatureDabeliImage from './signature-dabeli-real.jpg';
+import siteReferenceImage from './site-reference.jpg';
+
 
 const API = import.meta.env.VITE_API_URL || '/api';
 const MAPS_URL = 'https://maps.app.goo.gl/FB1o8G1ofJJSXWEs9?g_st=ic';
@@ -11,13 +15,13 @@ const PHONE = '+919975348154';
 const WHATSAPP = '919975348154';
 
 const menu = [
-  {id:'butter', name:'Amul Butter Dabeli', price:18, tag:'Rich & buttery', note:'Amul butter, signature masala, masala peanuts, sev & pomegranate', image:'/assets/butter-dabeli.webp', source:'QuikShef food image — demo reference'},
-  {id:'cheese', name:'Cheese Dabeli', price:30, tag:'Loaded cheese', note:'Classic dabeli filling with a generous cheese finish and crunchy garnish', image:'/assets/signature-dabeli-real.jpg', source:'Owner-provided Instagram photo'},
+  {id:'butter', name:'Amul Butter Dabeli', price:18, tag:'Rich & buttery', note:'Amul butter, signature masala, masala peanuts, sev & pomegranate', image:butterDabeliImage, source:'QuikShef food image — demo reference'},
+  {id:'cheese', name:'Cheese Dabeli', price:30, tag:'Loaded cheese', note:'Classic dabeli filling with a generous cheese finish and crunchy garnish', image:signatureDabeliImage, source:'Owner-provided Instagram photo'},
   {id:'special', name:'Special Dabeli', price:40, tag:'House favourite', note:'Extra masala, farsan, peanuts, sev, chutneys and fresh garnish', image:'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_600,h_600,c_fit/FOOD_CATALOG/IMAGES/CMS/2025/9/1/16b10227-77a4-4c3b-a5ab-6c66c81e698d_2f5b29f4-5e96-4adc-a09f-ce87e422aad5.jpg', source:'Swiggy food image — demo reference'},
   {id:'dryfruit', name:'Dryfruit Dabeli', price:35, tag:'Premium crunch', note:'Dabeli filling finished with almonds, cashews, raisins and pomegranate', image:'https://b.zmtcdn.com/data/dish_photos/50b/26e8d3b672ac7bd502c55b930601350b.png', source:'Zomato food image — demo reference'}
 ];
 
-const fallbackImage='/assets/signature-dabeli-real.jpg';
+const fallbackImage=signatureDabeliImage;
 
 function App(){
   const [mobileOpen,setMobileOpen]=useState(false);
@@ -54,7 +58,7 @@ function App(){
   return <div className="site">
     <div className="noise"/>
     <header className="nav">
-      <a className="brand" href="#top"><div className="brand-food"><img src="/assets/signature-dabeli-real.jpg" alt="Dabeli"/></div><span><b>श्रीकृष्ण</b><small>कच्छी दाबेली सेंटर</small></span></a>
+      <a className="brand" href="#top"><div className="brand-food"><img src={signatureDabeliImage} alt="Dabeli"/></div><span><b>श्रीकृष्ण</b><small>कच्छी दाबेली सेंटर</small></span></a>
       <nav className="navlinks">{['Home','Menu','Our Story','Gallery','Reviews','Contact'].map((x,i)=><a key={x} href={['#top','#menu','#story','#gallery','#reviews','#contact'][i]}>{x}</a>)}</nav>
       <div className="nav-actions"><a className="call" href={`tel:${PHONE}`}><Phone size={15}/><span>+91 99753 48154</span></a><button className="order-btn" onClick={()=>setMenuOpen(true)}><ShoppingBag size={16}/> Order Now <span className="count">{cartCount}</span></button><button className="hamb" onClick={()=>setMobileOpen(v=>!v)}>{mobileOpen?<X/>:<MenuIcon/>}</button></div>
     </header>
@@ -71,7 +75,7 @@ function App(){
         </div>
 
         <div className="hero-visual">
-          <div className="hero-photo-frame"><img src="/assets/site-reference.jpg" alt="Shree Krishna Kacchi Dabeli Centre reference"/></div>
+          <div className="hero-photo-frame"><img src={siteReferenceImage} alt="Shree Krishna Kacchi Dabeli Centre reference"/></div>
           <RealDabeli exploded={exploded} setExploded={setExploded}/>
           <div className="real-photo-badge"><span>REAL PHOTO</span><b>Signature Cheese Dabeli</b><small>Tap the dabeli to reveal the layers</small></div>
         </div>
@@ -89,17 +93,17 @@ function App(){
 
       <section id="story" className="experience section">
         <div className="experience-copy"><div className="eyebrow">THE SHREE KRISHNA STANDARD</div><h2>Street food.<br/><em>Elevated.</em></h2><p>Every dabeli is built around the things that matter: a soft pav, punchy masala, sweet-tangy chutneys, crunchy peanuts and sev, then a fresh garnish that makes the whole plate pop.</p><div className="stat-row"><div><b>01</b><span>Fresh pav</span></div><div><b>02</b><span>House masala</span></div><div><b>03</b><span>Hand finished</span></div></div></div>
-        <div className="ingredient-orbit"><div className="orbit-ring r1"/><div className="orbit-ring r2"/><div className="orbit-center"><img src="/assets/signature-dabeli-real.jpg" alt="Real dabeli"/></div><span className="orbit-label l1">Pomegranate</span><span className="orbit-label l2">Masala peanuts</span><span className="orbit-label l3">Signature sev</span></div>
+        <div className="ingredient-orbit"><div className="orbit-ring r1"/><div className="orbit-ring r2"/><div className="orbit-center"><img src={signatureDabeliImage} alt="Real dabeli"/></div><span className="orbit-label l1">Pomegranate</span><span className="orbit-label l2">Masala peanuts</span><span className="orbit-label l3">Signature sev</span></div>
       </section>
 
-      <section id="gallery" className="gallery section"><div className="section-head"><div><div className="eyebrow">FROM THE COUNTER</div><h2>Real taste. Real <em>moments.</em></h2></div></div><div className="gallery-grid"><div className="gallery-main"><img src="/assets/signature-dabeli-real.jpg" alt="Real Shree Krishna dabeli photo"/><div className="gallery-overlay"><span>Owner-provided food photo</span><b>Loaded, fresh and unmistakably dabeli.</b></div></div><div className="gallery-side"><div className="store-card"><img src="/assets/site-reference.jpg" alt="Shree Krishna storefront reference"/><span>Shree Krishna Centre</span></div><div className="map-card"><MapPin/><b>Find us in Manchar</b><p>Sant Rohidas Nagar, Peth<br/>Manchar, Maharashtra 410503</p><div className="map-actions"><a href={MAPS_URL} target="_blank" rel="noreferrer">Open Google Maps <ArrowRight size={15}/></a><a href={`tel:${PHONE}`}>Call the centre <Phone size={14}/></a></div></div></div></div></section>
+      <section id="gallery" className="gallery section"><div className="section-head"><div><div className="eyebrow">FROM THE COUNTER</div><h2>Real taste. Real <em>moments.</em></h2></div></div><div className="gallery-grid"><div className="gallery-main"><img src={signatureDabeliImage} alt="Real Shree Krishna dabeli photo"/><div className="gallery-overlay"><span>Owner-provided food photo</span><b>Loaded, fresh and unmistakably dabeli.</b></div></div><div className="gallery-side"><div className="store-card"><img src={siteReferenceImage} alt="Shree Krishna storefront reference"/><span>Shree Krishna Centre</span></div><div className="map-card"><MapPin/><b>Find us in Manchar</b><p>Sant Rohidas Nagar, Peth<br/>Manchar, Maharashtra 410503</p><div className="map-actions"><a href={MAPS_URL} target="_blank" rel="noreferrer">Open Google Maps <ArrowRight size={15}/></a><a href={`tel:${PHONE}`}>Call the centre <Phone size={14}/></a></div></div></div></div></section>
 
       <section id="reviews" className="reviews section"><div className="eyebrow">WHAT PEOPLE SAY</div><div className="review-card"><div className="stars">★★★★★</div><p>“Authentic, loaded and full of flavour — the kind of dabeli you remember after the first bite.”</p><div className="review-foot"><span>Google rating snapshot</span><b>4.4 ★</b></div></div></section>
 
       <section id="contact" className="contact section"><div><div className="eyebrow">VISIT • ORDER • ENJOY</div><h2>Ready for a <em>proper</em> dabeli?</h2><p>Call, visit, or build your order online. We’ll keep the experience simple and fast.</p></div><div className="contact-actions"><button onClick={()=>setMenuOpen(true)} className="gold-btn"><ShoppingBag size={17}/> Order online</button><a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="ghost-btn"><MessageCircle size={17}/> WhatsApp</a><a href={MAPS_URL} target="_blank" rel="noreferrer" className="ghost-btn"><MapPin size={17}/> Directions</a></div></section>
     </main>
 
-    <footer><div className="footer-brand"><div className="brand-food"><img src="/assets/signature-dabeli-real.jpg" alt="Dabeli"/></div><div><b>श्रीकृष्ण कच्छी दाबेली सेंटर</b><small>Manchar • Maharashtra</small></div></div><div className="footer-links"><a href="#menu">Menu</a><a href="#story">Our Story</a><a href="#gallery">Gallery</a><a href={MAPS_URL} target="_blank" rel="noreferrer">Maps</a><a href={INSTAGRAM_URL} target="_blank" rel="noreferrer"><Instagram size={15}/> Instagram</a></div><div className="copyright">© 2026 Shree Krishna Kacchi Dabeli Centre</div></footer>
+    <footer><div className="footer-brand"><div className="brand-food"><img src={signatureDabeliImage} alt="Dabeli"/></div><div><b>श्रीकृष्ण कच्छी दाबेली सेंटर</b><small>Manchar • Maharashtra</small></div></div><div className="footer-links"><a href="#menu">Menu</a><a href="#story">Our Story</a><a href="#gallery">Gallery</a><a href={MAPS_URL} target="_blank" rel="noreferrer">Maps</a><a href={INSTAGRAM_URL} target="_blank" rel="noreferrer"><Instagram size={15}/> Instagram</a></div><div className="copyright">© 2026 Shree Krishna Kacchi Dabeli Centre</div></footer>
 
     <AnimatePresence>{toast&&<motion.div initial={{y:30,opacity:0}} animate={{y:0,opacity:1}} exit={{y:30,opacity:0}} className="toast"><Check size={15}/>{toast}</motion.div>}</AnimatePresence>
     <AnimatePresence>{menuOpen&&<OrderModal cart={cart} total={total} customer={customer} setCustomer={setCustomer} add={add} changeQty={changeQty} checkout={checkout} close={()=>setMenuOpen(false)}/>}</AnimatePresence>
@@ -109,10 +113,10 @@ function App(){
 function RealDabeli({exploded,setExploded}){
   return <div className={`real-dabeli ${exploded?'is-exploded':''}`}>
     <button className="real-dabeli-hit" aria-label="Reveal the real dabeli layers" onClick={()=>setExploded(v=>!v)}>
-      <span className="photo-assembled"><img src="/assets/signature-dabeli-real.jpg" alt="Real cheese dabeli"/></span>
-      <span className="photo-layer layer-top"><img src="/assets/signature-dabeli-real.jpg" alt="Top pav layer"/></span>
-      <span className="photo-layer layer-fill"><img src="/assets/signature-dabeli-real.jpg" alt="Dabeli filling layer"/></span>
-      <span className="photo-layer layer-bottom"><img src="/assets/signature-dabeli-real.jpg" alt="Bottom pav layer"/></span>
+      <span className="photo-assembled"><img src={signatureDabeliImage} alt="Real cheese dabeli"/></span>
+      <span className="photo-layer layer-top"><img src={signatureDabeliImage} alt="Top pav layer"/></span>
+      <span className="photo-layer layer-fill"><img src={signatureDabeliImage} alt="Dabeli filling layer"/></span>
+      <span className="photo-layer layer-bottom"><img src={signatureDabeliImage} alt="Bottom pav layer"/></span>
       <span className="layer-line line-one"/><span className="layer-line line-two"/>
       <span className="tap-chip">{exploded?'TAP TO CLOSE':'TOUCH TO OPEN'}</span>
     </button>
